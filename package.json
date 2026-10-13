@@ -1,92 +1,164 @@
 {
-  "name": "@vitejs/plugin-react",
-  "version": "6.1.1",
-  "description": "The default Vite plugin for React projects",
+  "name": "react-router",
+  "version": "7.18.4",
+  "description": "Declarative routing for React",
   "keywords": [
-    "fast refresh",
     "react",
-    "react-refresh",
-    "vite",
-    "vite-plugin"
-  ],
-  "homepage": "https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#readme",
-  "bugs": {
-    "url": "https://github.com/vitejs/vite-plugin-react/issues"
-  },
-  "license": "MIT",
-  "author": "Evan You",
-  "contributors": [
-    "Alec Larson",
-    "Arnaud Barré"
+    "router",
+    "route",
+    "routing",
+    "history",
+    "link"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vitejs/vite-plugin-react.git",
-    "directory": "packages/plugin-react"
+    "url": "https://github.com/remix-run/react-router",
+    "directory": "packages/react-router"
   },
-  "files": [
-    "dist",
-    "types"
-  ],
-  "type": "module",
-  "imports": {
-    "#optionalTypes": "./types/optionalTypes.d.ts"
-  },
+  "license": "MIT",
+  "author": "Remix Software <hello@remix.run>",
+  "sideEffects": false,
+  "types": "./dist/development/index.d.ts",
+  "main": "./dist/development/index.js",
+  "module": "./dist/development/index.mjs",
   "exports": {
-    ".": "./dist/index.js",
-    "./preamble": "./types/preamble.d.ts"
+    ".": {
+      "react-server": {
+        "module": "./dist/development/index-react-server.mjs",
+        "default": "./dist/development/index-react-server.js"
+      },
+      "node": {
+        "types": "./dist/development/index.d.ts",
+        "module": "./dist/development/index.mjs",
+        "module-sync": "./dist/development/index.mjs",
+        "default": "./dist/development/index.js"
+      },
+      "module": {
+        "types": "./dist/development/index.d.mts",
+        "default": "./dist/development/index.mjs"
+      },
+      "import": {
+        "types": "./dist/development/index.d.mts",
+        "default": "./dist/development/index.mjs"
+      },
+      "default": {
+        "types": "./dist/development/index.d.ts",
+        "default": "./dist/development/index.js"
+      }
+    },
+    "./dom": {
+      "node": {
+        "types": "./dist/development/dom-export.d.ts",
+        "module": "./dist/development/dom-export.mjs",
+        "module-sync": "./dist/development/dom-export.mjs",
+        "default": "./dist/development/dom-export.js"
+      },
+      "module": {
+        "types": "./dist/development/dom-export.d.mts",
+        "default": "./dist/development/dom-export.mjs"
+      },
+      "import": {
+        "types": "./dist/development/dom-export.d.mts",
+        "default": "./dist/development/dom-export.mjs"
+      },
+      "default": {
+        "types": "./dist/development/dom-export.d.ts",
+        "default": "./dist/development/dom-export.js"
+      }
+    },
+    "./internal": {
+      "node": {
+        "types": "./dist/development/lib/types/internal.d.ts"
+      },
+      "import": {
+        "types": "./dist/development/lib/types/internal.d.mts"
+      },
+      "default": {
+        "types": "./dist/development/lib/types/index.d.ts"
+      }
+    },
+    "./internal/react-server-client": {
+      "react-server": {
+        "module": "./dist/development/index-react-server-client.mjs",
+        "default": "./dist/development/index-react-server-client.js"
+      },
+      "node": {
+        "types": "./dist/development/index.d.ts",
+        "module": "./dist/development/index.mjs",
+        "module-sync": "./dist/development/index.mjs",
+        "default": "./dist/development/index.js"
+      },
+      "module": {
+        "types": "./dist/development/index.d.mts",
+        "default": "./dist/development/index.mjs"
+      },
+      "import": {
+        "types": "./dist/development/index.d.mts",
+        "default": "./dist/development/index.mjs"
+      },
+      "default": {
+        "types": "./dist/development/index.d.ts",
+        "default": "./dist/development/index.js"
+      }
+    },
+    "./package.json": "./package.json"
   },
-  "scripts": {
-    "dev": "tsdown --watch ./src --watch ../common",
-    "build": "tsdown",
-    "prepublishOnly": "npm run build",
-    "test-unit": "vitest run"
+  "wireit": {
+    "build": {
+      "command": "premove dist && tsup && tsup --config tsup.config.rsc.ts",
+      "files": [
+        "../../pnpm-workspace.yaml",
+        "lib/**",
+        "*.ts",
+        "tsconfig.json",
+        "package.json"
+      ],
+      "output": [
+        "dist/**"
+      ]
+    }
   },
   "dependencies": {
-    "@rolldown/pluginutils": "^1.0.1"
+    "cookie": "^1.0.1",
+    "set-cookie-parser": "^2.6.0"
   },
   "devDependencies": {
-    "@babel/core": "8.0.1",
-    "@rolldown/plugin-babel": "^0.2.3",
-    "@vitejs/react-common": "workspace:*",
-    "babel-plugin-react-compiler": "^1.0.0",
-    "oxc-transform-react": "^0.147.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "rolldown": "^1.2.6",
-    "tsdown": "^0.22.14",
-    "vite": "^8.2.2"
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/set-cookie-parser": "^2.4.1",
+    "jest-environment-jsdom": "^29.6.2",
+    "premove": "^4.0.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-test-renderer": "^19.1.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.4.5",
+    "undici": "^6.19.2",
+    "wireit": "0.14.9"
   },
   "peerDependencies": {
-    "@rolldown/plugin-babel": "^0.1.7 || ^0.2.0",
-    "babel-plugin-react-compiler": "^1.0.0",
-    "oxc-transform-react": "^0.145.0",
-    "vite": "^8.0.0"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "peerDependenciesMeta": {
-    "@rolldown/plugin-babel": {
-      "optional": true
-    },
-    "babel-plugin-react-compiler": {
-      "optional": true
-    },
-    "oxc-transform-react": {
+    "react-dom": {
       "optional": true
     }
   },
+  "files": [
+    "dist/",
+    "docs/",
+    "CHANGELOG.md",
+    "LICENSE.md",
+    "README.md"
+  ],
   "engines": {
-    "node": "^20.19.0 || >=22.12.0"
+    "node": ">=20.0.0"
   },
-  "compatiblePackages": {
-    "schemaVersion": 1,
-    "rolldown": {
-      "type": "compatible",
-      "versions": "^1.0.0",
-      "note": "You can use Rolldown's built-in feature directly."
-    },
-    "rollup": {
-      "type": "incompatible",
-      "reason": "Uses Rolldown-specific APIs or Vite-specific APIs"
-    }
+  "scripts": {
+    "build": "wireit",
+    "watch": "tsup --watch & tsup --config tsup.config.rsc.ts --watch",
+    "typecheck": "tsc"
   }
 }
